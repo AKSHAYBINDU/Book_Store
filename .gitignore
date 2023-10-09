@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+.npm/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Compiled code or build artifacts
+dist/
+.next/
+out/
