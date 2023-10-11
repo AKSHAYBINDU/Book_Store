@@ -9,19 +9,36 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   
+  // useEffect(() => {
+  //   setLoading(true);
+  //   axios
+  //     .get("http://localhost:5555/books")
+  //     .then((response) => {
+  //       setBooks(response.data.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:5555/books")
-      .then((response) => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('http://localhost:5555/books');
         setBooks(response.data.data);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
         setLoading(false);
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   return (
     <div className=" p-4">
@@ -49,7 +66,7 @@ const Home = () => {
                 Operations
               </th>
             </tr>
-          </thead>
+          </thead> 
           <tbody>
             {books.map((book, index) => (
               <tr key={book._id} className=" h-8">
